@@ -101,5 +101,15 @@ class DistributorController extends Controller
         $distributor->delete();
         return redirect()->route('distributor.index')->with('hapus', ' The Distributor data, ' .
             $distributor->nama_distributor . ' has been successfuly deleted! ');
+
+        $ada_purchases = DB::table('purchases')->where('id_distributor', $id)->exists();
+        if ($ada_purchases) {
+            return redirect()->route('distributor.index')->with('forbiden', 'The Product data cannot be deleted because it is still linked to purchase data!');
+        } else {
+            $nama = DB::table('disttributor')->where('id', $id)->value('nama_distributor');
+            Distributor::findOrFail($id)->delete();
+            return redirect()->route('distributor.index')->with('hapus', 'The Product data, ' .
+                $nama . ' , has been successfully deleted!');
+        }
     }
 }

@@ -185,8 +185,8 @@
                                         <td class=" font-weight-bolder text-xs mb-0">Rp. {{ number_format($data->harga_jual, 0, ',', '.') }}</td>
                                         <td class=" font-weight-bolder text-xs mb-0">{{ number_format($data->harga_stok, 0, ',', '.') }} </td>
                                         <td class="font-weight-bolder text-xs mb-0">
-                                         <a href="{{ route('distributor.edit', $data->id) }}"> <img src="be\assets\img\pen-3-outline-18.png" alt="gambar pen" width="20" class="cursor-pointer me-2" title="Edit" > </a>
-                                         <a href="{{ route('distributor.destroy', $data->id) }}" onclick="hapus(event, this)"><img src="be\assets\img\trash-fill-18.png" alt="gambar sampah" width="20" class="cursor-pointer me-2" title="Delete"></a>
+                                         <a href="{{ route('products.edit', $data->id) }}"> <img src="be\assets\img\pen-3-outline-18.png" alt="gambar pen" width="20" class="cursor-pointer me-2" title="Edit" > </a>
+                                         <a href="{{ route('products.destroy', $data->id) }}" onclick="hapus(event, this)"><img src="be\assets\img\trash-fill-18.png" alt="gambar sampah" width="20" class="cursor-pointer me-2" title="Delete"></a>
                                         </td>
                                     </tr>
                                     <!-- Modal -->
@@ -292,11 +292,11 @@
 
    <script>
     @if (session('btnsimpan'))
-        swal("Good Job!", "{{ session('btnsimpan') }}", "success");
+        swal("Success!", "{{ session('btnsimpan') }}", "success");
     @endif
 
     @if (session('ubah'))
-        swal("Good Job!", "{{ session('ubah') }}", "success");
+        swal("Success!", "{{ session('ubah') }}", "success");
     @endif
 
     @if (session('hapus'))

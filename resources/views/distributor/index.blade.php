@@ -259,15 +259,19 @@
 
    <script>
     @if (session('btnsimpan'))
-        swal("Good Job!", "{{ session('btnsimpan') }}", "success");
+        swal("Success!", "{{ session('btnsimpan') }}", "success");
     @endif
 
     @if (session('ubah'))
-        swal("Good Job!", "{{ session('ubah') }}", "success");
+        swal("Success!", "{{ session('ubah') }}", "success");
     @endif
 
     @if (session('hapus'))
         swal("Deleted!", "{{ session('hapus') }}", "success");
+    @endif
+
+    @if (session('forbiden'))
+        swal("Forbiden!", "{{ session('hapus') }}", "success");
     @endif
 </script>
 

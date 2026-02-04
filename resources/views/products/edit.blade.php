@@ -182,24 +182,26 @@
                         id="frm"
                         enctype="multipart/form-data"
                     >
+                    @method('PUT')
                         @csrf
 
                         <div class="row">
 
                             <div class="col-lg-6">
                                 <div class="mb-3 px-3">
-                                    <label for="kdbarang" class="form-label">Code</label>
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        id="kdbarang"
-                                        name="kdbarang"
-                                        placeholder="Input code"
-                                        required
-                                        value="{{ old('kdbarang') }}"
-                                        maxlength="15"
-                                    >
-                                </div>
+    <label for="kdbarang" class="form-label">Code</label>
+    <input
+        type="text"
+        class="form-control"
+        id="kdbarang"
+        name="kdbarang"
+        placeholder="Input code"
+        required
+        value="{{ old('kdbarang', $data->kdbarang) }}"
+        maxlength="15"
+    >
+</div>
+
 
                                 <div class="mb-3 px-3">
                                     <label for="nama_barang" class="form-label">Name</label>
@@ -210,7 +212,7 @@
                                         name="nama_barang"
                                         placeholder="Input Name"
                                         required
-                                        value="{{ old('nama_barang') }}"
+                                        value="{{ old('nama_barang', $data->nama_barang) }}"
                                         maxlength="50"
                                     >
                                 </div>
@@ -224,7 +226,7 @@
                                         name="jenis_barang"
                                         placeholder="Input Type"
                                         required
-                                        value="{{ old('jenis_barang') }}"
+                                        value="{{ old('jenis_barang', $data->jenis_barang) }}"
                                         maxlength="50"
                                     >
                                 </div>
@@ -237,7 +239,7 @@
                                         id="tgl_expired"
                                         name="tgl_expired"
                                         required
-                                        value="{{ old('tgl_expired') }}"
+                                        value="{{ old('tgl_expired', $data->tgl_expired) }}"
                                     >
                                 </div>
                             </div>
@@ -251,7 +253,7 @@
                                         id="harga_jual"
                                         name="harga_jual"
                                         required
-                                        value="{{ old('harga_jual') ? old('harga_jual') : 0 }}"
+                                        value="{{ old('harga_jual') ? old('harga_jual', $data->harga_jual) : 0 }}"
                                         maxlength="11"
                                     >
                                 </div>
@@ -347,12 +349,6 @@
             if (stok.value.trim() === '') {
                 swal("Invalid", "Stock cannot be empety!", "error");
                 stok.focus();
-                return;
-            }
-
-            if (foto_barang.value.trim() === '') {
-                swal("Invalid", "Image cannot be empety!", "error");
-                foto_barang.focus();
                 return;
             }
 
