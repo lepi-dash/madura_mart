@@ -4,7 +4,7 @@
     @include ('be.menu')
 @endsection
 
-@section('products')
+@section('purchase')
 
     <!-- NAVBAR ATAS -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
@@ -149,33 +149,58 @@
 
                 <div class="card-body px-0 pt-0 pb-2">
 
-                    <form action="{{ route('products.store') }}" method="POST" class="p-3" id="frm"
+                    <form action="{{ route('purchase.store') }}" method="POST" class="p-3" id="frm"
                         enctype="multipart/form-data">
                         @csrf
 
                         <div class="row">
 
                             <div class="col-lg-6">
-                                <div class="mb-3 px-3">
-                                    <label for="kdbarang" class="form-label">Code</label>
-                                    <input type="text" class="form-control" id="kdbarang" name="kdbarang"
-                                        placeholder="Input code" required value="{{ old('kdbarang') }}" maxlength="15">
+
+                                 <div class="mb-3 px-3">
+                                    <label for="no_nota" class="form-label">Invoice No</label>
+                                    <input type="text" class="form-control" id="no_nota" name="no_nota"
+                                        placeholder="Input Type" required value="{{ old('no_nota') }}" maxlength="50">
                                 </div>
 
                                 <div class="mb-3 px-3">
-                                    <label for="nama_barang" class="form-label">Name</label>
-                                    <input type="text" class="form-control" id="nama_barang" name="nama_barang"
-                                        placeholder="Input Name" required value="{{ old('nama_barang') }}" maxlength="50">
+                                    <label for="no_nota" class="form-label">Distributor</label>
+                                    <select class=" form-select "name="distributor" id="distributor">
+                                        <option value="">Select Distributor</option>
+                                        @foreach ($distributors as $distributor)
+                                            <option value="{{ $distributor->id }}"
+                                            {{ old('distributor') == $distributor->id ? 'selected' : '' }}>
+                                            {{ $distributor->nama_distributor }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="mb-3 px-3">
+                                    <label for="no_nota" class="form-label">Product</label>
+                                        <select class=" form-select "name="distributor" id="distributor">
+                                        <option value="">Select Product</option>
+                                        @foreach ($products as $product)
+                                            <option value="{{ $product->id }}"
+                                            {{ old('id_barang') == $product->id ? 'selected' : '' }}>
+                                            {{ $product->nama_barang }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
 
                                 <div class="mb-3 px-3">
-                                    <label for="jenis_barang" class="form-label">Type</label>
-                                    <input type="text" class="form-control" id="jenis_barang" name="jenis_barang"
-                                        placeholder="Input Type" required value="{{ old('jenis_barang') }}" maxlength="50">
+                                    <label for="harga_beli" class="form-label">Purchase Price</label>
+                                    <input type="text" class="form-control" id="harga_beli" name="harga_beli" required
+                                        value="{{ old('harga_beli') ? old('harga_beli') : 0 }}" maxlength="11">
+                                </div>
+                                <div class="mb-3 px-3">
+                                    <label for="harga_beli" class="form-label">Purchase Price</label>
+                                    <input type="text" class="form-control" id="harga_beli" name="harga_beli" required
+                                        value="{{ old('harga_beli') ? old('harga_beli') : 0 }}" maxlength="11">
                                 </div>
 
                                 <div class="mb-3 px-3">
-                                    <label for="tgl_expired" class="form-label">Expired Date</label>
+                                    <label for="tgl_expired" class="form-label">Invoice Date</label>
                                     <input type="date" class="form-control" id="tgl_expired" name="tgl_expired" required
                                         value="{{ old('tgl_expired') }}">
                                 </div>

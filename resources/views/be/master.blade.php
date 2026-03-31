@@ -17,7 +17,7 @@
   <link id="pagestyle" href="{{ asset('be/assets/css/soft-ui-dashboard.css?v=1.0.7') }}" rel="stylesheet" />
   <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
 
-<!-- Sweertalert -->
+  <!-- Sweertalert -->
   <script src="{{ asset('be/assets/js/plugins/sweetalert.js')}}"></script>
   <link rel="stylesheet" href="{{ asset('be/assets/css/sweetalert.css')}}">
 </head>
@@ -30,7 +30,7 @@
         aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html "
         target="_blank">
-        <img src="{{ asset('be/assets/img/image.png')}}" class="navbar-brand-img h-100"  alt="main_logo">
+        <img src="{{ asset('be/assets/img/image.png')}}" class="navbar-brand-img h-100" alt="main_logo">
         <span class="ms-1 font-weight-bold">Madura Mart</span>
       </a>
     </div>
@@ -43,18 +43,22 @@
   </aside>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
 
-   @if ($tittle === 'Dashboard')
-    @yield('dashboard')
-   @endif
+    @if ($tittle === 'Dashboard')
+      @yield('dashboard')
+    @endif
 
-   @if ($tittle === 'Distributor')
-    @yield('distributor')
-   @endif
+    @if ($tittle === 'Distributor')
+      @yield('distributor')
+    @endif
 
-   @if ($tittle === 'Products')
-    @yield('products')
-   @endif
-    
+    @if ($tittle === 'Products')
+      @yield('products')
+    @endif
+
+    @if ($tittle === 'Purchase')
+      @yield('purchase')
+    @endif
+
   </main>
   <div class="fixed-plugin">
     <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">

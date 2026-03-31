@@ -175,13 +175,8 @@
 
                 <div class="card-body px-0 pt-0 pb-2">
 
-                    <form
-                        action="{{ route('products.store') }}"
-                        method="POST"
-                        class="p-3"
-                        id="frm"
-                        enctype="multipart/form-data"
-                    >
+                   <form action="{{ route('products.update', $data->id) }}" method="POST" id="frm" enctype="multipart/form-data">
+
                     @method('PUT')
                         @csrf
 
@@ -212,7 +207,7 @@
                                         name="nama_barang"
                                         placeholder="Input Name"
                                         required
-                                        value="{{ old('nama_barang', $data->nama_barang) }}"
+                                        value="{{ old('nama_barang') }}"
                                         maxlength="50"
                                     >
                                 </div>
@@ -226,7 +221,7 @@
                                         name="jenis_barang"
                                         placeholder="Input Type"
                                         required
-                                        value="{{ old('jenis_barang', $data->jenis_barang) }}"
+                                        value="{{ old('jenis_barang') }}"
                                         maxlength="50"
                                     >
                                 </div>
@@ -239,7 +234,7 @@
                                         id="tgl_expired"
                                         name="tgl_expired"
                                         required
-                                        value="{{ old('tgl_expired', $data->tgl_expired) }}"
+                                        value="{{ old('tgl_expired') }}"
                                     >
                                 </div>
                             </div>
@@ -253,7 +248,7 @@
                                         id="harga_jual"
                                         name="harga_jual"
                                         required
-                                        value="{{ old('harga_jual') ? old('harga_jual', $data->harga_jual) : 0 }}"
+                                        value="{{ old('harga_jual') ? old('harga_jual') : 0 }}"
                                         maxlength="11"
                                     >
                                 </div>
@@ -349,6 +344,12 @@
             if (stok.value.trim() === '') {
                 swal("Invalid", "Stock cannot be empety!", "error");
                 stok.focus();
+                return;
+            }
+
+            if (foto_barang.value.trim() === '') {
+                swal("Invalid", "Image cannot be empety!", "error");
+                foto_barang.focus();
                 return;
             }
 

@@ -25,7 +25,7 @@
                 <ul class="navbar-nav  justify-content-end">
                     <li class="nav-item d-flex align-items-center">
                         <!-- <a class="btn btn-outline-primary btn-sm mb-0 me-3" target="_blank"
-                                        href="https://www.creative-tim.com/builder?ref=navbar-soft-ui-dashboard">Online Builder</a> -->
+                                            href="https://www.creative-tim.com/builder?ref=navbar-soft-ui-dashboard">Online Builder</a> -->
 
 
                     </li>
@@ -155,15 +155,18 @@
                         @csrf
                         <div class="mb-3">
                             <label for="nama_distributor" class="form-label">Nama Distributor</label>
-                            <input type="text" class="form-control" id="nama_distributor" name="nama_distributor" placeholder="Input Nama" required value="{{ old('nama_distributor') }}">
+                            <input type="text" class="form-control" id="nama_distributor" name="nama_distributor"
+                                placeholder="Input Nama" required value="{{ old('nama_distributor') }}">
                         </div>
                         <div class="mb-3">
                             <label for="alamat_distributor" class="form-label">Alamat</label>
-                            <textarea class="form-control" id="alamat_distributor" name="alamat_distributor" rows="3" placeholder="Input Alamat" required>{{ old('alamat_distributor') }}</textarea>
+                            <textarea class="form-control" id="alamat_distributor" name="alamat_distributor" rows="3"
+                                placeholder="Input Alamat" required>{{ old('alamat_distributor') }}</textarea>
                         </div>
                         <div class="mb-3">
                             <label for="notelpon_distributor" class="form-label">No Telpon</label>
-                            <input type="text" class="form-control" id="notelpon_distributor" name="notelpon_distributor" placeholder="Input No Telp" required value="{{ old('notelpon_distributor') }}">
+                            <input type="text" class="form-control" id="notelpon_distributor" name="notelpon_distributor"
+                                placeholder="Input No Telp" required value="{{ old('notelpon_distributor') }}">
                         </div>
                         <button type="button" class="btn btn-primary" id="btnsimpan">Submit</button>
                 </div>
@@ -212,56 +215,55 @@
                 </div>
             </div>
         </footer>
-       <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-<script>
-    let btnsimpan = document.getElementById('btnsimpan');
-    let frm = document.getElementById('frm');
-    let nama_distributor = document.getElementById('nama_distributor');
-    let alamat_distributor = document.getElementById('alamat_distributor');
-    let notelpon_distributor = document.getElementById('notelpon_distributor');
+        <script>
+            let btnsimpan = document.getElementById('btnsimpan');
+            let frm = document.getElementById('frm');
+            let nama_distributor = document.getElementById('nama_distributor');
+            let alamat_distributor = document.getElementById('alamat_distributor');
+            let notelpon_distributor = document.getElementById('notelpon_distributor');
 
-    btnsimpan.addEventListener('click', function () {
+            btnsimpan.addEventListener('click', function () {
 
-        if (nama_distributor.value.trim() === '') {
-            swal("Invalid", "Nama Distributor tidak boleh kosong!", "error");
-            nama_distributor.focus();
-            return;
-        }
+                if (nama_distributor.value.trim() === '') {
+                    swal("Invalid", "Nama Distributor tidak boleh kosong!", "error");
+                    nama_distributor.focus();
+                    return;
+                }
 
-        if (alamat_distributor.value.trim() === '') {
-            swal("Invalid", "Alamat tidak boleh kosong!", "error");
-            alamat_distributor.focus();
-            return;
-        }
+                if (alamat_distributor.value.trim() === '') {
+                    swal("Invalid", "Alamat tidak boleh kosong!", "error");
+                    alamat_distributor.focus();
+                    return;
+                }
 
-        if (notelpon_distributor.value.trim() === '') {
-            swal("Invalid", "No Telpon tidak boleh kosong!", "error");
-            notelpon_distributor.focus();
-            return;
-        }
+                if (notelpon_distributor.value.trim() === '') {
+                    swal("Invalid", "No Telpon tidak boleh kosong!", "error");
+                    notelpon_distributor.focus();
+                    return;
+                }
 
-        // Animasi sukses
-        swal({
-            title: "Berhasil!",
-            text: "Data akan disimpan",
-            icon: "success",
-            buttons: false,
-            timer: 1500
-        }).then(() => {
-            frm.submit();
-        });
-    });
+                // Animasi sukses
+                swal({
+                    title: "Berhasil!",
+                    text: "Data akan disimpan",
+                    icon: "success",
+                    buttons: false,
+                    timer: 1500
+                }).then(() => {
+                    frm.submit();
+                });
+            });
 
- @if (session('duplikat'))
-            swal("Duplikat Data!", "{{ session('duplikat') }}", "error");
-        @endif
+            @if (session('duplikat'))
+                swal("Duplikat Data!", "{{ session('duplikat') }}", "error");
+            @endif
 
 
 
-</script>
+        </script>
 
     </div>
 
 @endsection
-

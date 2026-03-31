@@ -96,7 +96,7 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        $ada_purchases = DB::table('purchase_details')->where('id_barang', $id)->exists();
+        $ada_purchases = DB::table('product')->where('kdbarang', $id)->exists();
         if ($ada_purchases) {
             return redirect()->route('products.index')->with('forbiden', 'The Product data cannot be deleted because it is still linked to purchase data!');
         } else {

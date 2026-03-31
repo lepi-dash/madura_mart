@@ -2,7 +2,7 @@
 @section('menu')
     @include ('be.menu')
 @endsection
-@section('distributor')
+@section('purchase')
     <!-- NAVBAR ATAS -->
 
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
@@ -27,8 +27,8 @@
                         <!-- <a class="btn btn-outline-primary btn-sm mb-0 me-3" target="_blank"
                                             href="https://www.creative-tim.com/builder?ref=navbar-soft-ui-dashboard">Online Builder</a> -->
 
-                        <a href="{{ route('distributor.create') }}" class="btn bg-gradient-dark  mb-0 me-3">Add New
-                            Distributor</a>
+                        <a href="{{ route('purchase.create') }}" class="btn bg-gradient-dark  mb-0 me-3">Add
+                            {{ $tittle }}</a>
 
                     </li>
                     <li class="nav-item d-flex align-items-center">
@@ -144,53 +144,7 @@
 
     <!-- Main Bagian Kanan -->
 
-    <div class="row">
-        <div class="col-12">
-            <div class="card mb-4">
-                <div class="card-header pb-0">
-                    <h6>{{ $tittle }}</h6>
-                </div>
-                <div class="card-body px-0 pt-0 pb-2">
-                    <div class="table-responsive p-0">
-                        <table class="table align-items-center mb-0">
-                            <thead>
-                                <tr>
-                                    <th class="text-uppercase text-primary text-xxs font-weight-bolder opacity-7 ps-2">NO
-                                    </th>
-                                    <th class="text-uppercase text-primary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        DISTRIBUTOR NAME</th>
-                                    <th class="text-uppercase text-primary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        ADDRESS</th>
-                                    <th class="text-uppercase text-primary text-xxs font-weight-bolder opacity-7 ps-2">PHONE
-                                        NUMBER</th>
-                                    <th class="text-secondary opacity-7"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($datas as $nmr => $data)
-                                    <tr>
-                                        <td class="font-weight-bolder text-xs mb-0">{{ $nmr + 1 . "." }}</td>
-                                        <td class="font-weight-bolder text-xs mb-0">
-                                            <a href="{{ route('distributor.edit', $data->id) }}"> <img
-                                                    src="be\assets\img\pen-3-outline-18.png" alt="gambar pen" width="20"
-                                                    class="cursor-pointer me-2" title="Edit"> </a>
-                                            <a href="{{ route('distributor.destroy', $data->id) }}"
-                                                onclick="hapus(event, this)"><img src="be\assets\img\trash-fill-18.png"
-                                                    alt="gambar sampah" width="20" class="cursor-pointer me-2"
-                                                    title="Delete"></a>
-                                            {{ $data->nama_distributor }}
-                                        </td>
-                                        <td class="font-weight-bolder text-xs mb-0">{{ $data->alamat_distributor }}</td>
-                                        <td class=" font-weight-bolder text-xs mb-0">{{ $data->notelpon_distributor }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
     <!-- End Main Bagian Kanan -->
 
     <div class="container-fluid py-4">
@@ -274,10 +228,6 @@
 
         @if (session('hapus'))
             swal("Deleted!", "{{ session('hapus') }}", "success");
-        @endif
-
-        @if (session('forbiden'))
-            swal("Forbiden!", "{{ session('hapus') }}", "success");
         @endif
     </script>
 
