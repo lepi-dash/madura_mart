@@ -59,6 +59,9 @@
       @yield('purchase')
     @endif
 
+    @if ($tittle === 'Users')
+      @yield('users')
+      @endif
   </main>
   <div class="fixed-plugin">
     <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
