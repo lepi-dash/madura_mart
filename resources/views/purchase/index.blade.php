@@ -143,51 +143,111 @@
     <!-- END NAVBAR ATAS -->
 
     <!-- Main Bagian Kanan -->
+    <div class="card-body px-0 pt-0 pb-2">
+                        <div class="table-responsive p-0">
+                            <table class="table align-items-center mb-0">
+                                <thead>
+                                    <tr>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            No</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Invoice No</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            Invoice Date</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            Product Id</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            Product Name</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            Product Type</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                            Expired Date</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Stock</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Selling Price</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Purchase Price</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Selling Margin</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Quantity</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Image</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Sub Total</th>
+                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Total Pay</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                @foreach ($datas as $nmr => $data)
+                                    <tr>
+                                        <td class="font-weight-bolder text-xs mb-0">{{ $nmr + 1 . "." }}</td>
+                                        <td class="font-weight-bolder text-xs mb-0">
+                                            <a href="{{ route('purchase.edit', $data->id) }}"> <img
+                                                    src="be\assets\img\pen-3-outline-18.png" alt="gambar pen" width="20"
+                                                    class="cursor-pointer me-2" title="Edit"> </a>
+                                            <a href="{{ route('purchase.destroy', $data->id) }}"
+                                                onclick="hapus(event, this)"><img src="be\assets\img\trash-fill-18.png"
+                                                    alt="gambar sampah" width="20" class="cursor-pointer me-2"
+                                                    title="Delete"></a>
+                                            {{ $data->nama_distributor }}
+                                        </td>
+                                        <td class="font-weight-bolder text-xs mb-0">{{ $data->no_nota }}</td>
+                                        <td class="font-weight-bolder text-xs mb-0">{{ $data->tgl_expired }}</td>
+                                        <td class="font-weight-bolder text-xs mb-0">{{ $data->id_barang }}</td>
+                                        <td class="font-weight-bolder text-xs mb-0">{{ $data->nama_barang }}</td>
+                                        <td class="font-weight-bolder text-xs mb-0">{{ $data->jenis_barang }}</td>
+                                        <td class="font-weight-bolder text-xs mb-0">{{ $data->tgl_expired }}</td>
+                                        <td class="font-weight-bolder text-xs mb-0">{{ $data->stok }}</td>
+                                        <td class="font-weight-bolder text-xs mb-0">Rp. {{ number_format($data->harga_beli, 0, ',', '.') }}</td>
+                                        <td class="font-weight-bolder text-xs mb-0">Rp. {{ number_format($data->harga_jual, 0, ',', '.') }}</td>
+                                        <td class="font-weight-bolder text-xs mb-0">{{ $data->margin_jual }}</td>
+                                        <td class=" font-weight-bolder text-xs mb-0">{{ $data->jumlah_beli }}</td>
+                                        <td class=" font-weight-bolder text-xs mb-0">
+                                        <img src="{{ asset('storage/' . $data->foto_barang) }}" class="img-thumbnail cursor-pointer" alt="img product" width="50
+                                        " data-bs-toggle="modal"
+                                        data-bs-target="#staticBackdrop {{ $data->id_barang }}">
+                                        </td>
+                                        <td class=" font-weight-bolder text-xs mb-0">Rp. {{ number_format($data->sub_total, 0, ',', '.') }}> </td>
+                                        <td class=" font-weight-bolder text-xs mb-0">Rp. {{ number_format($data->total_bayar, 0, ',', '.') }} </td>
+                                        </td>
+                                        <!-- Modal -->
+                                      <div class="modal fade" id="staticBackdrop{{ $data->id_barang }}" data-bs-backdrop="static"
+                                        data-bs-keyboard="false" tabindex="-1"
+                                        aria-labelledby="staticBackdropLabel{{ $data->id_barang }}" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="staticBackdropLabel">{{ $data->nama_barang }}
+                                                    </h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+
+                                                <div class="modal-body text-center">
+                                                    <img src="{{ asset('storage/' . $data->foto_barang) }}"
+                                                        class="img-thumbnail cursor-pointer" alt="img Product" width="75%">
+                                                </div>
+
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+
 
     
     <!-- End Main Bagian Kanan -->
 
-    <div class="container-fluid py-4">
-
-        <footer class="footer pt-3  ">
-            <div class="container-fluid">
-                <div class="row align-items-center justify-content-lg-between">
-                    <div class="col-lg-6 mb-lg-0 mb-4">
-                        <div class="copyright text-center text-sm text-muted text-lg-start">
-                            ©
-                            <script>
-                                document.write(new Date().getFullYear())
-                            </script>,
-                            made with <i class="fa fa-heart"></i> by
-                            <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
-                            for a better web.
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                            <li class="nav-item">
-                                <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative
-                                    Tim</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted"
-                                    target="_blank">About
-                                    Us</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="https://www.creative-tim.com/blog" class="nav-link text-muted"
-                                    target="_blank">Blog</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted"
-                                    target="_blank">License</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    </div>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 

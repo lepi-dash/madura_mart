@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Distributor;
 use App\Models\Product;
 use App\Models\Purchase;
@@ -16,7 +17,7 @@ class PurchaseController extends Controller
     {
         return view('purchase.index', [
             'tittle' => 'Purchase',
-            // 'datas' => DB::table('purchase')->get()
+            'datas' => DB::table('vwpurcase')->get()
         ]);
     }
 
