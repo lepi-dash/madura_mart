@@ -96,6 +96,8 @@
         </div>
     </div>
 
+     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <script>
         @if (session('simpan'))
             swal("Success", "{{ session('simpan') }}", "success");

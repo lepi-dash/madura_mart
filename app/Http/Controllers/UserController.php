@@ -29,10 +29,20 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+        // ✅ VALIDASI
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:3',
+        ]);
+
         try {
             $data = $request->only(['name', 'email', 'role', 'alamat', 'no_telepon']);
+
+            // ✅ HASH PASSWORD
             $data['password'] = Hash::make($request->password);
 
+            // ✅ UPLOAD FOTO
             if ($request->hasFile('foto')) {
                 $file = $request->file('foto');
                 $filename = time() . '_' . $file->getClientOriginalName();
@@ -43,85 +53,59 @@ class UserController extends Controller
             }
 
             User::create($data);
-            return redirect()->route('users.index')->with('simpan', 'User ' . $request->name . ' berhasil disimpan');
-        } catch (QueryException $e) {
-            if ($e->errorInfo[1] == 1062) {
-                return redirect()->back()->withInput()->with('error', 'Gagal: Email sudah terdaftar.');
-            }
-            return redirect()->back()->withInput()->with('error', 'Gagal menyimpan users: ' . $e->getMessage());
+
+            return redirect()->route('users.index')->with('simpan', 'User berhasil ditambahkan');
         } catch (Throwable $e) {
-            return redirect()->back()->withInput()->with('error', 'Terjadi kesalahan sistem: ' . $e->getMessage());
+            return redirect()->back()->withInput()->with('error', $e->getMessage());
         }
     }
 
-    public function edit(string $id)
+    public function edit($id)
     {
-        try {
-            return view('users.edit', [
-                'tittle' => 'Users',
-                'data' => User::findOrFail($id)
-            ]);
-        } catch (ModelNotFoundException $e) {
-            return redirect()->route('users.index')->with('error', 'User tidak ditemukan.');
-        } catch (Throwable $e) {
-            return redirect()->route('users.index')->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
-        }
+        return view('users.edit', [
+            'tittle' => 'Users',
+            'data' => User::findOrFail($id)
+        ]);
     }
 
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        try {
-            $data = $request->only(['name', 'email', 'role', 'alamat', 'no_telepon']);
-            if ($request->password) {
-                $data['password'] = Hash::make($request->password);
-            }
-            $users = User::findOrFail($id);
+        $user = User::findOrFail($id);
 
-            if ($request->hasFile('foto')) {
-                if ($users->foto && $users->foto != 'default.png' && File::exists(public_path('images/users/' . $users->foto))) {
-                    File::delete(public_path('images/users/' . $users->foto));
-                }
-                $file = $request->file('foto');
-                $filename = time() . '_' . $file->getClientOriginalName();
-                $file->move(public_path('images/users'), $filename);
-                $data['foto'] = $filename;
-            }
+        $data = $request->only(['name', 'email', 'role', 'alamat', 'no_telepon']);
 
-            $users->update($data);
-            return redirect()->route('users.index')->with('ubah', 'User ' . $request->name . ' berhasil diupdate');
-        } catch (QueryException $e) {
-            if ($e->errorInfo[1] == 1062) {
-                return redirect()->back()->withInput()->with('error', 'Gagal: Email sudah terdaftar.');
-            }
-            return redirect()->back()->withInput()->with('error', 'Gagal mengupdate users: ' . $e->getMessage());
-        } catch (ModelNotFoundException $e) {
-            return redirect()->route('users.index')->with('error', 'User tidak ditemukan.');
-        } catch (Throwable $e) {
-            return redirect()->back()->withInput()->with('error', 'Terjadi kesalahan sistem: ' . $e->getMessage());
+        // ✅ PASSWORD OPTIONAL
+        if ($request->filled('password')) {
+            $data['password'] = Hash::make($request->password);
         }
+
+        // ✅ UPDATE FOTO
+        if ($request->hasFile('foto')) {
+            if ($user->foto != 'default.png' && File::exists(public_path('images/users/' . $user->foto))) {
+                File::delete(public_path('images/users/' . $user->foto));
+            }
+
+            $file = $request->file('foto');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('images/users'), $filename);
+            $data['foto'] = $filename;
+        }
+
+        $user->update($data);
+
+        return redirect()->route('users.index')->with('ubah', 'User berhasil diupdate');
     }
 
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        try {
-            $users = User::findOrFail($id);
-            $nama = $users->name;
+        $user = User::findOrFail($id);
 
-            if ($users->foto && $users->foto != 'default.png' && File::exists(public_path('images/users/' . $users->foto))) {
-                File::delete(public_path('images/users/' . $users->foto));
-            }
-
-            $users->delete();
-            return redirect()->route('users.index')->with('hapus', 'User ' . $nama . ' berhasil dihapus');
-        } catch (ModelNotFoundException $e) {
-            return redirect()->route('users.index')->with('error', 'User tidak ditemukan atau sudah dihapus.');
-        } catch (QueryException $e) {
-             if ($e->errorInfo[1] == 1451) {
-                 return redirect()->route('users.index')->with('error', 'Gagal: User tidak bisa dihapus karena memiliki data transaksi (Order).');
-            }
-            return redirect()->route('users.index')->with('error', 'Gagal menghapus users: ' . $e->getMessage());
-        } catch (Throwable $e) {
-            return redirect()->route('users.index')->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        if ($user->foto != 'default.png' && File::exists(public_path('images/users/' . $user->foto))) {
+            File::delete(public_path('images/users/' . $user->foto));
         }
+
+        $user->delete();
+
+        return redirect()->route('users.index')->with('hapus', 'User berhasil dihapus');
     }
 }
