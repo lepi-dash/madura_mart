@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Purchase_Detail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Distributor;
@@ -38,7 +39,15 @@ class PurchaseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $purchase = $request->only('no_nota', 'tgl_nota', 'id_distributor');
+        $purchase = Purchase::created($purchase);
+
+        // Simpan purchase detail
+        $purchaseDetails = $request->input('id_barang', 'harga_beli', 'margin_jual', 'jumlah_beli', 'subtotal');
+        $purchaseDetails = Purchase_Detail::created($purchaseDetails);
+
+        return redirect()->route('purchase.create')->with('success', 'Purchase with invoice no ' . $purchase->no_nota . ' has been saved successfully!')
+        ->with('data', DB::table('purchase')->where('id', DB::table('purchase')->max('id'))->first());
     }
 
     /**

@@ -180,69 +180,88 @@
                                     </tr>
                                 </thead>
 
-                                <tbody>
-                                @foreach ($datas as $nmr => $data)
-                                    <tr>
-                                        <td class="font-weight-bolder text-xs mb-0">{{ $nmr + 1 . "." }}</td>
-                                        <td class="font-weight-bolder text-xs mb-0">
-                                            <a href="{{ route('purchase.edit', $data->id) }}"> <img
-                                                    src="be\assets\img\pen-3-outline-18.png" alt="gambar pen" width="20"
-                                                    class="cursor-pointer me-2" title="Edit"> </a>
-                                            <a href="{{ route('purchase.destroy', $data->id) }}"
-                                                onclick="hapus(event, this)"><img src="be\assets\img\trash-fill-18.png"
-                                                    alt="gambar sampah" width="20" class="cursor-pointer me-2"
-                                                    title="Delete"></a>
-                                            {{ $data->nama_distributor }}
-                                        </td>
-                                        <td class="font-weight-bolder text-xs mb-0">{{ $data->no_nota }}</td>
-                                        <td class="font-weight-bolder text-xs mb-0">{{ $data->tgl_expired }}</td>
-                                        <td class="font-weight-bolder text-xs mb-0">{{ $data->id_barang }}</td>
-                                        <td class="font-weight-bolder text-xs mb-0">{{ $data->nama_barang }}</td>
-                                        <td class="font-weight-bolder text-xs mb-0">{{ $data->jenis_barang }}</td>
-                                        <td class="font-weight-bolder text-xs mb-0">{{ $data->tgl_expired }}</td>
-                                        <td class="font-weight-bolder text-xs mb-0">{{ $data->stok }}</td>
-                                        <td class="font-weight-bolder text-xs mb-0">Rp. {{ number_format($data->harga_beli, 0, ',', '.') }}</td>
-                                        <td class="font-weight-bolder text-xs mb-0">Rp. {{ number_format($data->harga_jual, 0, ',', '.') }}</td>
-                                        <td class="font-weight-bolder text-xs mb-0">{{ $data->margin_jual }}</td>
-                                        <td class=" font-weight-bolder text-xs mb-0">{{ $data->jumlah_beli }}</td>
-                                        <td class=" font-weight-bolder text-xs mb-0">
-                                        <img src="{{ asset('storage/' . $data->foto_barang) }}" class="img-thumbnail cursor-pointer" alt="img product" width="50
-                                        " data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop {{ $data->id_barang }}">
-                                        </td>
-                                        <td class=" font-weight-bolder text-xs mb-0">Rp. {{ number_format($data->sub_total, 0, ',', '.') }}> </td>
-                                        <td class=" font-weight-bolder text-xs mb-0">Rp. {{ number_format($data->total_bayar, 0, ',', '.') }} </td>
-                                        </td>
-                                        <!-- Modal -->
-                                      <div class="modal fade" id="staticBackdrop{{ $data->id_barang }}" data-bs-backdrop="static"
-                                        data-bs-keyboard="false" tabindex="-1"
-                                        aria-labelledby="staticBackdropLabel{{ $data->id_barang }}" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="staticBackdropLabel">{{ $data->nama_barang }}
-                                                    </h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                                </div>
+<tbody>
+    @foreach ($datas as $nmr => $data)
+        <tr>
+            {{-- 1. No --}}
+            <td class="font-weight-bolder text-xs mb-0">{{ $nmr + 1 . "." }}</td>
 
-                                                <div class="modal-body text-center">
-                                                    <img src="{{ asset('storage/' . $data->foto_barang) }}"
-                                                        class="img-thumbnail cursor-pointer" alt="img Product" width="75%">
-                                                </div>
+            {{-- 2. Invoice No --}}
+            <td class="font-weight-bolder text-xs mb-0">{{ $data->no_nota }}</td>
 
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Close</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
+            {{-- 3. Invoice Date --}}
+            <td class="font-weight-bolder text-xs mb-0">{{ $data->tgl_nota }}</td>
+
+            {{-- 4. Product Id --}}
+            <td class="font-weight-bolder text-xs mb-0">{{ $data->id_barang }}</td>
+
+            {{-- 5. Product Name --}}
+            <td class="font-weight-bolder text-xs mb-0">{{ $data->nama_barang }}</td>
+
+            {{-- 6. Product Type --}}
+            <td class="font-weight-bolder text-xs mb-0">{{ $data->jenis_barang }}</td>
+
+            {{-- 7. Expired Date --}}
+            <td class="font-weight-bolder text-xs mb-0">{{ $data->tgl_expired }}</td>
+
+            {{-- 8. Stock --}}
+            <td class="text-center font-weight-bolder text-xs mb-0">{{ $data->stok }}</td>
+
+            {{-- 9. Selling Price --}}
+            <td class="text-center font-weight-bolder text-xs mb-0">Rp {{ number_format($data->harga_jual, 0, ',', '.') }}</td>
+
+            {{-- 10. Purchase Price --}}
+            <td class="text-center font-weight-bolder text-xs mb-0">Rp {{ number_format($data->harga_beli, 0, ',', '.') }}</td>
+
+            {{-- 11. Selling Margin --}}
+            <td class="text-center font-weight-bolder text-xs mb-0">{{ $data->margin_jual }}</td>
+
+            {{-- 12. Quantity --}}
+            <td class="text-center font-weight-bolder text-xs mb-0">{{ $data->jumlah_beli }}</td>
+
+            {{-- 13. Image --}}
+            <td class="text-center font-weight-bolder text-xs mb-0">
+                <img src="{{ asset('storage/' . $data->foto_barang) }}" class="img-thumbnail cursor-pointer" alt="img product" width="50" 
+                     data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ $data->id_barang }}">
+            </td>
+
+            {{-- 14. Sub Total --}}
+            <td class="text-center font-weight-bolder text-xs mb-0">Rp {{ number_format($data->sub_total, 0, ',', '.') }}</td>
+
+            {{-- 15. Total Pay --}}
+            <td class="text-center font-weight-bolder text-xs mb-0">Rp {{ number_format($data->total_bayar, 0, ',', '.') }}</td>
+
+            {{-- 16. AKSI (paling kanan) --}}
+            <td class="text-center font-weight-bolder text-xs mb-0">
+                <div class="d-flex justify-content-center">
+                    <a href="{{ route('purchase.edit', $data->id) }}"> 
+                        <img src="{{ asset('be/assets/img/pen-3-outline-18.png') }}" alt="Edit" width="20" class="cursor-pointer me-2" title="Edit"> 
+                    </a>
+                    <a href="{{ route('purchase.destroy', $data->id) }}" onclick="hapus(event, this)">
+                        <img src="{{ asset('be/assets/img/trash-fill-18.png') }}" alt="Delete" width="20" class="cursor-pointer" title="Delete">
+                    </a>
+                </div>
+            </td>
+        </tr>
+
+        <div class="modal fade" id="staticBackdrop{{ $data->id_barang }}" data-bs-backdrop="static" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{ $data->nama_barang }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <img src="{{ asset('storage/' . $data->foto_barang) }}" class="img-thumbnail" alt="Product" width="75%">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+</tbody>
 
 
     
