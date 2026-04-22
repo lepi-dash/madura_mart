@@ -308,7 +308,7 @@
                                 <label for="total_bayar" class="form-label">Total Pay</label>
                                 <input type="text" class="form-control" id="total_bayar" name="total_bayar" placeholder="Enter Product Total Pay" value="@if (isset(session('data')->total_bayar))
                                     {{ session('data')->total_bayar }}
-                                @endif" readonly>
+                                @endif" readonly disabled>
                             </div>
                         </div>
                     </div>
@@ -364,6 +364,9 @@
           </div>
         </div>
       </footer>
+
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <script>
     let btnSimpan = document.getElementById('simpan');
     let form = document.getElementById('form');
@@ -449,9 +452,82 @@
     margin_jual.addEventListener('keypress', hanyaAngka);
     jumlah_beli.addEventListener('keypress', hanyaAngka);
 
-    @if (session('duplikat'))
-        swal("Duplicated Data!", "{{ session('duplikat') }}", "error");
+    harga_beli.addEventListener('focus', function() {
+        if (harga_beli.value.trim() === '0') {
+            harga_beli.value = '';
+        }
+    });
+
+    harga_beli.addEventListener('blur', function() {
+        if (harga_beli.value.trim() === '0') {
+            harga_beli.value = '';
+        }
+    });
+
+    margin_jual.addEventListener('focus', function() {
+        if (margin_jual.value.trim() === '0') {
+            margin_jual.value = '';
+        }
+    });
+
+    margin_jual.addEventListener('blur', function() {
+        if (margin_jual.value.trim() === '0') {
+            margin_jual.value = '';
+        }
+    });
+
+    jumlah_beli.addEventListener('focus', function() {
+        if (jumlah_beli.value.trim() === '0') {
+            jumlah_beli.value = '';
+        }
+    });
+
+    jumlah_beli.addEventListener('blur', function() {
+        if (jumlah_beli.value.trim() === '0') {
+            jumlah_beli.value = '';
+        }
+    });
+
+
+    function totalBayar() {
+        let st = parseInt(subtotal.value) || 0;
+        let total_bayar_lama = 0;
+        
+        @if(isset(session('data')->total_bayar))
+            total_bayar_lama = {{ session('data')->total_bayar }};
+        @endif
+        
+        total_bayar_input.value = st + total_bayar_lama;
+    }
+
+    
+
+    @if (session('success'))
+        swal({
+            title: "Success!",
+            text: "{{ session('success') }}",
+            type: "info",
+            showCancelButton: true,
+            confirmButtonText: "Yes, add new item purchase!",
+            confirmButtonClass: "btn-info",
+            cancelButtonText: "No, cancel!",
+            closeOnConfirm: true
+        },
+      
+        function(isConfirm) {
+            if (isConfirm) {
+              no_nota.disabled = true;
+              distributor.disabled = true
+              tgl_nota.disabled = true
+            } else {
+              window.location.href = "{{ route('purchase.index') }}";
+        }
+      )
+
     @endif
+
+
+    
 </script>
     </div>
      

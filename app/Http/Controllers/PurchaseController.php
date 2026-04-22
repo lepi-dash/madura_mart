@@ -37,18 +37,20 @@ class PurchaseController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        $purchase = $request->only('no_nota', 'tgl_nota', 'id_distributor');
-        $purchase = Purchase::created($purchase);
+   public function store(Request $request)
+{
+    $purchase = $request->only('no_nota', 'tgl_nota', 'id_distributor');
+    $purchase['total_bayar'] = 0; 
+    $purchase = Purchase::create($purchase);
+    
+    $purchaseDetails = $request->only('id_barang', 'harga_beli', 'margin_jual', 'jumlah_beli', 'subtotal');
+    $purchaseDetails['id_pembelian'] = $purchase->id; 
+    $purchaseDetails = Purchase_Detail::create($purchaseDetails);
 
-        // Simpan purchase detail
-        $purchaseDetails = $request->input('id_barang', 'harga_beli', 'margin_jual', 'jumlah_beli', 'subtotal');
-        $purchaseDetails = Purchase_Detail::created($purchaseDetails);
-
-        return redirect()->route('purchase.create')->with('success', 'Purchase with invoice no ' . $purchase->no_nota . ' has been saved successfully!')
-        ->with('data', DB::table('purchase')->where('id', DB::table('purchase')->max('id'))->first());
-    }
+    return redirect()->route('purchase.create')
+    ->with('success', 'Purchase with invoice no ' . $request->no_nota . ' has been saved successfully!')
+    ->with('data', DB::table('purchases')->where('id', DB::table('purchases')->max('id'))->first());
+}
 
     /**
      * Display the specified resource.
