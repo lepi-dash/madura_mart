@@ -5,6 +5,7 @@ use App\Http\Controllers\DistributorController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SaleController;
 use App\Models\Purchase;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +25,7 @@ Route::resource('distributor' , DistributorController::class);
 Route::resource('products' ,    ProductController::class);
 Route::resource('purchase',  PurchaseController::class);
 Route::resource('users', UserController::class);
+Route::resource('sale', SaleController::class);
 
 // Route::resource('create' , DistributorController::class);
 // Route::resource('edit' , DistributorController::class);

@@ -300,7 +300,7 @@
                             </div>
                             <div class="mb-3 px-3 pt-3">
                                 <label for="subtotal" class="form-label">Subtotal</label>
-                                <input type="text" class="form-control" id="subtotal" name="subtotal" placeholder="Enter Product Subtotal" value="@if (isset(session('data')->subtotal))
+                                <input type="text" class="form-control" id="subtotal" name="sub_total" placeholder="Enter Product Subtotal" value="@if (isset(session('data')->subtotal))
                                     {{ session('data')->subtotal }}
                                 @endif" readonly>
                             </div>
@@ -308,7 +308,7 @@
                                 <label for="total_bayar" class="form-label">Total Pay</label>
                                 <input type="text" class="form-control" id="total_bayar" name="total_bayar" placeholder="Enter Product Total Pay" value="@if (isset(session('data')->total_bayar))
                                     {{ session('data')->total_bayar }}
-                                @endif" readonly disabled>
+                                @endif" readonly>
                             </div>
                         </div>
                     </div>

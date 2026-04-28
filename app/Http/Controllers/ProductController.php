@@ -14,9 +14,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-         return view('products.index', [
-        'tittle' => 'Products',
-        'datas'=> Product::all() 
+        return view('products.index', [
+            'tittle' => 'Products',
+            'datas' => Product::all()
         ]);
     }
 
@@ -37,20 +37,20 @@ class ProductController extends Controller
     {
         $kd = DB::table('products')->where('kdbarang', $request->kdbarang)->value('kdbarang');
         $nama = DB::table('products')->where('nama_barang', $request->nama_barang)->value('nama_barang');
-     
-        if ($request->kdbarang == $kd && $request->nama_barang == $nama){
+
+        if ($request->kdbarang == $kd && $request->nama_barang == $nama) {
             return redirect()->route('products.create')->with('duplikat', 'Product, ' .
                 $request->nama_barang . ' data with code ' . $request->kdbarang . ' is already in the database!')->withinput();
-        } else if ($request->nama_barang == $nama){
+        } else if ($request->nama_barang == $nama) {
             return redirect()->route('products.create')->with('duplikat', 'Product, ' .
                 $request->nama_barang . ' data with name ' . $request->nama_barang . ' is already in the database!')->withinput();
         } else {
             $data = $request->all();
-            $data['foto_barang'] =  $request->file('foto_barang')->store('product_images');
+            $data['foto_barang'] = $request->file('foto_barang')->store('product_images');
             Product::create($data);
             return redirect()->route('products.index')->with('btnsimpan', 'Product, ' .
-           $request->nama_barang . ' , has been successfully  saved');
-    }
+                $request->nama_barang . ' , has been successfully  saved');
+        }
     }
 
     /**
@@ -66,7 +66,7 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-         return view('products.edit', [
+        return view('products.edit', [
             'tittle' => 'Products',
             'data' => Product::findOrFail($id)
         ]);
@@ -77,18 +77,26 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-          $nama_lama = DB::table('products')->where('id', $id)->value('nama_barang');
-          $foto_barang_lama = DB::table('products')->where('id', $id)->value('foto_barang');
-          $products = Product::findOrFail($id);
-          if ($request->hasFile('foto_barang')){
-            $data = $request->all();
-            $data['foto_barang'] =  $request->file('foto_barang')->store('product_images');
-            Storage::delete($foto_barang_lama);
-            return redirect()->route('products.index')->with('update', 'The Product Data , ' . $nama_lama . ' , has been successfully updated');
-          } else {
-            $products->update($request->all());
-            return redirect()->route('products.index')->with('update', 'The Product Data , ' . $nama_lama . ' , has been successfully updated');
-          }
+        $product = Product::findOrFail($id);
+        $nama_lama = $product->nama_barang;
+        $foto_lama = $product->foto_barang;
+
+        $request->validate([
+            'kdbarang' => 'required|string|max:15|unique:products,kdbarang,' . $id,
+            'nama_barang' => 'required|string|max:50|unique:products,nama_barang,' . $id,
+            'harga_jual' => 'required|integer|min:0',
+            'stok' => 'required|integer|min:0',
+        ]);
+
+        $updateData = $request->all();
+        if ($request->hasFile('foto_barang')) {
+            if ($foto_lama)
+                Storage::delete('product_images/' . $foto_lama);
+            $updateData['foto_barang'] = $request->file('foto_barang')->store('product_images');
+        }
+
+        $product->update($updateData);
+        return redirect()->route('products.index')->with('update', 'Product "' . $nama_lama . '" berhasil diupdate!');
     }
 
     /**
@@ -96,14 +104,16 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        $ada_purchases = DB::table('product')->where('kdbarang', $id)->exists();
+        // Check if linked to purchase__details (actual table name)
+        $ada_purchases = DB::table('purchase__details')->where('id_barang', $id)->exists();
         if ($ada_purchases) {
-            return redirect()->route('products.index')->with('forbiden', 'The Product data cannot be deleted because it is still linked to purchase data!');
-        } else {
-            $nama = DB::table('products')->where('id', $id)->value('nama_barang');
-            Product::findOrFail($id)->delete();
-            return redirect()->route('products.index')->with('hapus', 'The Product data, ' .
-                $nama . ' , has been successfully deleted!');
+            return redirect()->route('products.index')->with('forbiden', 'Product tidak bisa dihapus karena terkait purchase!');
         }
+        $nama = DB::table('products')->where('id', $id)->value('nama_barang');
+        $foto = DB::table('products')->where('id', $id)->value('foto_barang');
+        if ($foto)
+            Storage::delete('product_images/' . $foto);
+        Product::findOrFail($id)->delete();
+        return redirect()->route('products.index')->with('hapus', 'Product ' . $nama . ' berhasil dihapus!');
     }
 }

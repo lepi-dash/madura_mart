@@ -8,11 +8,20 @@ class Purchase extends Model
 {
     protected $table = 'purchases';
 
-    // Izinkan semua kolom ini diisi. Nama harus SAMA PERSIS dengan di phpMyAdmin
     protected $fillable = [
         'no_nota',
         'tgl_nota',
         'id_distributor',
         'total_bayar'
     ];
+
+    public function purchaseDetails()
+    {
+        return $this->hasMany(Purchase_Detail::class, 'id_pembelian');
+    }
+
+    public function distributor()
+    {
+        return $this->belongsTo(Distributor::class);
+    }
 }

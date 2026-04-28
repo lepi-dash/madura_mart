@@ -271,7 +271,7 @@
     <!-- Menu Awal Sale -->
 
     <li class="nav-item">
-      <a class="nav-link  " href="{{ url('pages/rtl.html') }}">
+      <a class="nav-link @if ($tittle === 'Sale') active  @endif" href="{{ route('sale.index') }}">
         <div
           class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
           <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="40px" height="40px" viewBox="2 0 14 18">

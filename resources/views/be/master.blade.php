@@ -59,6 +59,10 @@
       @yield('purchase')
     @endif
 
+    @if ($tittle === 'Sale')
+      @yield('sale')
+    @endif
+
     @if ($tittle === 'Users')
       @yield('users')
       @endif

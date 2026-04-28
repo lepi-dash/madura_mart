@@ -25,7 +25,7 @@
                 <ul class="navbar-nav  justify-content-end">
                     <li class="nav-item d-flex align-items-center">
                         <!-- <a class="btn btn-outline-primary btn-sm mb-0 me-3" target="_blank"
-                                            href="https://www.creative-tim.com/builder?ref=navbar-soft-ui-dashboard">Online Builder</a> -->
+                                                    href="https://www.creative-tim.com/builder?ref=navbar-soft-ui-dashboard">Online Builder</a> -->
 
                         <a href="{{ route('products.create') }}" class="btn bg-gradient-dark  mb-0 me-3">Add
                             {{ $tittle }}</a>
@@ -188,9 +188,11 @@
                                         <td class=" font-weight-bolder text-xs mb-0">{{ $data->jenis_barang }}</td>
                                         <td class=" font-weight-bolder text-xs mb-0">{{ $data->tgl_expired }}</td>
                                         <td class=" font-weight-bolder text-xs mb-0">Rp.
-                                            {{ number_format($data->harga_jual, 0, ',', '.') }}</td>
+                                            {{ number_format($data->harga_jual, 0, ',', '.') }}
+                                        </td>
                                         <td class=" font-weight-bolder text-xs mb-0">
-                                            {{ number_format($data->harga_stok, 0, ',', '.') }} </td>
+                                            {{ number_format($data->stok, 0, ',', '.') }}
+                                        </td>
                                         <td class="font-weight-bolder text-xs mb-0">
                                             <a href="{{ route('products.edit', $data->id) }}"> <img
                                                     src="be\assets\img\pen-3-outline-18.png" alt="gambar pen" width="20"

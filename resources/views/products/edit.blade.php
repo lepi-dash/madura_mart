@@ -7,11 +7,8 @@
 @section('products')
 
     <!-- NAVBAR ATAS -->
-    <nav
-        class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl"
-        id="navbarBlur"
-        navbar-scroll="true"
-    >
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
+        navbar-scroll="true">
         <div class="container-fluid py-1 px-3">
 
             <nav aria-label="breadcrumb">
@@ -26,20 +23,13 @@
                 <h6 class="font-weight-bolder mb-0">{{ $tittle }}</h6>
             </nav>
 
-            <div
-                class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4"
-                id="navbar"
-            >
+            <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                 <div class="ms-md-auto pe-md-3 d-flex align-items-center">
                     <div class="input-group">
                         <span class="input-group-text text-body">
                             <i class="fas fa-search" aria-hidden="true"></i>
                         </span>
-                        <input
-                            type="text"
-                            class="form-control"
-                            placeholder="Type here..."
-                        >
+                        <input type="text" class="form-control" placeholder="Type here...">
                     </div>
                 </div>
 
@@ -57,11 +47,7 @@
                     </li>
 
                     <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
-                        <a
-                            href="javascript:;"
-                            class="nav-link text-body p-0"
-                            id="iconNavbarSidenav"
-                        >
+                        <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
                             <div class="sidenav-toggler-inner">
                                 <i class="sidenav-toggler-line"></i>
                                 <i class="sidenav-toggler-line"></i>
@@ -77,29 +63,19 @@
                     </li>
 
                     <li class="nav-item dropdown pe-2 d-flex align-items-center">
-                        <a
-                            href="javascript:;"
-                            class="nav-link text-body p-0"
-                            id="dropdownMenuButton"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false"
-                        >
+                        <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton"
+                            data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="fa fa-bell cursor-pointer"></i>
                         </a>
 
-                        <ul
-                            class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4"
-                            aria-labelledby="dropdownMenuButton"
-                        >
+                        <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
 
                             <li class="mb-2">
                                 <a class="dropdown-item border-radius-md" href="javascript:;">
                                     <div class="d-flex py-1">
                                         <div class="my-auto">
-                                            <img
-                                                src="{{ asset('be/assets/img/team-2.jpg') }}"
-                                                class="avatar avatar-sm me-3"
-                                            >
+                                            <img src="{{ asset('be/assets/img/team-2.jpg') }}"
+                                                class="avatar avatar-sm me-3">
                                         </div>
                                         <div class="d-flex flex-column justify-content-center">
                                             <h6 class="text-sm font-weight-normal mb-1">
@@ -118,10 +94,8 @@
                                 <a class="dropdown-item border-radius-md" href="javascript:;">
                                     <div class="d-flex py-1">
                                         <div class="my-auto">
-                                            <img
-                                                src="{{ asset('be/assets/img/small-logos/logo-spotify.svg') }}"
-                                                class="avatar avatar-sm bg-gradient-dark me-3"
-                                            >
+                                            <img src="{{ asset('be/assets/img/small-logos/logo-spotify.svg') }}"
+                                                class="avatar avatar-sm bg-gradient-dark me-3">
                                         </div>
                                         <div class="d-flex flex-column justify-content-center">
                                             <h6 class="text-sm font-weight-normal mb-1">
@@ -175,116 +149,66 @@
 
                 <div class="card-body px-0 pt-0 pb-2">
 
-                   <form action="{{ route('products.update', $data->id) }}" method="POST" id="frm" enctype="multipart/form-data">
+                    <form action="{{ route('products.update', $data->id) }}" method="POST" id="frm"
+                        enctype="multipart/form-data">
 
-                    @method('PUT')
+                        @method('PUT')
                         @csrf
 
                         <div class="row">
 
                             <div class="col-lg-6">
                                 <div class="mb-3 px-3">
-    <label for="kdbarang" class="form-label">Code</label>
-    <input
-        type="text"
-        class="form-control"
-        id="kdbarang"
-        name="kdbarang"
-        placeholder="Input code"
-        required
-        value="{{ old('kdbarang', $data->kdbarang) }}"
-        maxlength="15"
-    >
-</div>
+                                    <label for="kdbarang" class="form-label">Code</label>
+                                    <input type="text" class="form-control" id="kdbarang" name="kdbarang"
+                                        placeholder="Input code" required value="{{ old('kdbarang', $data->kdbarang) }}"
+                                        maxlength="15" readonly>
+                                </div>
 
 
                                 <div class="mb-3 px-3">
                                     <label for="nama_barang" class="form-label">Name</label>
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        id="nama_barang"
-                                        name="nama_barang"
-                                        placeholder="Input Name"
-                                        required
-                                        value="{{ old('nama_barang') }}"
-                                        maxlength="50"
-                                    >
+                                    <input type="text" class="form-control" id="nama_barang" name="nama_barang"
+                                        placeholder="Input Name" required
+                                        value="{{ old('nama_barang', $data->nama_barang) }}" maxlength="50">
                                 </div>
 
                                 <div class="mb-3 px-3">
                                     <label for="jenis_barang" class="form-label">Type</label>
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        id="jenis_barang"
-                                        name="jenis_barang"
-                                        placeholder="Input Type"
-                                        required
-                                        value="{{ old('jenis_barang') }}"
-                                        maxlength="50"
-                                    >
+                                    <input type="text" class="form-control" id="jenis_barang" name="jenis_barang"
+                                        placeholder="Input Type" required
+                                        value="{{ old('jenis_barang', $data->jenis_barang) }}" maxlength="50">
                                 </div>
 
                                 <div class="mb-3 px-3">
                                     <label for="tgl_expired" class="form-label">Expired Date</label>
-                                    <input
-                                        type="date"
-                                        class="form-control"
-                                        id="tgl_expired"
-                                        name="tgl_expired"
-                                        required
-                                        value="{{ old('tgl_expired') }}"
-                                    >
+                                    <input type="date" class="form-control" id="tgl_expired" name="tgl_expired" required
+                                        value="{{ old('tgl_expired', $data->tgl_expired) }}">
                                 </div>
                             </div>
 
                             <div class="col-lg-6">
                                 <div class="mb-3 px-3">
                                     <label for="harga_jual" class="form-label">Price</label>
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        id="harga_jual"
-                                        name="harga_jual"
-                                        required
-                                        value="{{ old('harga_jual') ? old('harga_jual') : 0 }}"
-                                        maxlength="11"
-                                    >
+                                    <input type="text" class="form-control" id="harga_jual" name="harga_jual" required
+                                        value="{{ old('harga_jual', $data->harga_jual) }}" maxlength="11">
                                 </div>
 
                                 <div class="mb-3 px-3">
                                     <label for="stok" class="form-label">Stock</label>
-                                    <input
-                                        type="text"
-                                        class="form-control"
-                                        id="stok"
-                                        name="stok"
-                                        required
-                                        value="{{ old('stok') ? old('stok') : 0 }}"
-                                        maxlength="11"
-                                    >
+                                    <input type="text" class="form-control" id="stok" name="stok" required
+                                        value="{{ old('stok', $data->stok) }}" maxlength="11">
                                 </div>
 
                                 <div class="mb-3 px-3">
                                     <label for="foto_barang" class="form-label">Image</label>
-                                    <input
-                                        type="file"
-                                        class="form-control"
-                                        id="foto_barang"
-                                        name="foto_barang"
-                                        required
-                                    >
+                                    <input type="file" class="form-control" id="foto_barang" name="foto_barang">
                                 </div>
                             </div>
 
                         </div>
 
-                        <button
-                            type="button"
-                            class="btn btn-primary"
-                            id="btnsimpan"
-                        >
+                        <button type="button" class="btn btn-primary" id="btnsimpan">
                             Submit
                         </button>
 
@@ -347,12 +271,6 @@
                 return;
             }
 
-            if (foto_barang.value.trim() === '') {
-                swal("Invalid", "Image cannot be empety!", "error");
-                foto_barang.focus();
-                return;
-            }
-
             swal({
                 title: "Berhasil!",
                 text: "Data akan disimpan",
@@ -365,7 +283,7 @@
         });
 
         // @if (session('duplikat'))
-        //     swal("Duplikat Data!", "{{ session('duplikat') }}", "error");
+            //     swal("Duplikat Data!", "{{ session('duplikat') }}", "error");
         // @endif
     </script>
 

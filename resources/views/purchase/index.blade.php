@@ -25,7 +25,7 @@
                 <ul class="navbar-nav  justify-content-end">
                     <li class="nav-item d-flex align-items-center">
                         <!-- <a class="btn btn-outline-primary btn-sm mb-0 me-3" target="_blank"
-                                            href="https://www.creative-tim.com/builder?ref=navbar-soft-ui-dashboard">Online Builder</a> -->
+                                                href="https://www.creative-tim.com/builder?ref=navbar-soft-ui-dashboard">Online Builder</a> -->
 
                         <a href="{{ route('purchase.create') }}" class="btn bg-gradient-dark  mb-0 me-3">Add
                             {{ $tittle }}</a>
@@ -144,171 +144,171 @@
 
     <!-- Main Bagian Kanan -->
     <div class="card-body px-0 pt-0 pb-2">
-                        <div class="table-responsive p-0">
-                            <table class="table align-items-center mb-0">
-                                <thead>
-                                    <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            No</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Invoice No</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Invoice Date</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Product Id</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Product Name</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Product Type</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Expired Date</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Stock</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Selling Price</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Purchase Price</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Selling Margin</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Quantity</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Image</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Sub Total</th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Total Pay</th>
-                                    </tr>
-                                </thead>
+        <div class="table-responsive p-0">
+            <table class="table align-items-center mb-0">
+                <thead>
+                    <tr>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            No</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Invoice No</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                            Invoice Date</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                            Product Id</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                            Product Name</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                            Product Type</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                            Expired Date</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            Stock</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            Selling Price</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            Purchase Price</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            Selling Margin</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            Quantity</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            Image</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            Sub Total</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                            Total Pay</th>
+                    </tr>
+                </thead>
 
-<tbody>
-    @foreach ($datas as $nmr => $data)
-        <tr>
-            {{-- 1. No --}}
-            <td class="font-weight-bolder text-xs mb-0">{{ $nmr + 1 . "." }}</td>
+                <tbody>
+                    @foreach ($datas as $nmr => $data)
+                        <tr>
+                            {{-- 1. No --}}
+                            <td class="font-weight-bolder text-xs mb-0">{{ $nmr + 1 . "." }}</td>
 
-            {{-- 2. Invoice No --}}
-            <td class="font-weight-bolder text-xs mb-0">{{ $data->no_nota }}</td>
+                            {{-- 2. Invoice No --}}
+                            <td class="font-weight-bolder text-xs mb-0">{{ $data->no_nota }}</td>
 
-            {{-- 3. Invoice Date --}}
-            <td class="font-weight-bolder text-xs mb-0">{{ $data->tgl_nota }}</td>
+                            {{-- 3. Invoice Date --}}
+                            <td class="font-weight-bolder text-xs mb-0">{{ $data->tgl_nota }}</td>
 
-            {{-- 4. Product Id --}}
-            <td class="font-weight-bolder text-xs mb-0">{{ $data->id_barang }}</td>
+                            {{-- 4. Product Id --}}
+                            <td class="font-weight-bolder text-xs mb-0">{{ $data->id_barang }}</td>
 
-            {{-- 5. Product Name --}}
-            <td class="font-weight-bolder text-xs mb-0">{{ $data->nama_barang }}</td>
+                            {{-- 5. Product Name --}}
+                            <td class="font-weight-bolder text-xs mb-0">{{ $data->nama_barang }}</td>
 
-            {{-- 6. Product Type --}}
-            <td class="font-weight-bolder text-xs mb-0">{{ $data->jenis_barang }}</td>
+                            {{-- 6. Product Type --}}
+                            <td class="font-weight-bolder text-xs mb-0">{{ $data->jenis_barang }}</td>
 
-            {{-- 7. Expired Date --}}
-            <td class="font-weight-bolder text-xs mb-0">{{ $data->tgl_expired }}</td>
+                            {{-- 7. Expired Date --}}
+                            <td class="font-weight-bolder text-xs mb-0">{{ $data->tgl_expired }}</td>
 
-            {{-- 8. Stock --}}
-            <td class="text-center font-weight-bolder text-xs mb-0">{{ $data->stok }}</td>
+                            {{-- 8. Stock --}}
+                            <td class="text-center font-weight-bolder text-xs mb-0">{{ $data->stok }}</td>
 
-            {{-- 9. Selling Price --}}
-            <td class="text-center font-weight-bolder text-xs mb-0">Rp {{ number_format($data->harga_jual, 0, ',', '.') }}</td>
+                            {{-- 9. Selling Price --}}
+                            <td class="text-center font-weight-bolder text-xs mb-0">Rp
+                                {{ number_format($data->harga_jual, 0, ',', '.') }}</td>
 
-            {{-- 10. Purchase Price --}}
-            <td class="text-center font-weight-bolder text-xs mb-0">Rp {{ number_format($data->harga_beli, 0, ',', '.') }}</td>
+                            {{-- 10. Purchase Price --}}
+                            <td class="text-center font-weight-bolder text-xs mb-0">Rp
+                                {{ number_format($data->harga_beli, 0, ',', '.') }}</td>
 
-            {{-- 11. Selling Margin --}}
-            <td class="text-center font-weight-bolder text-xs mb-0">{{ $data->margin_jual }}</td>
+                            {{-- 11. Selling Margin --}}
+                            <td class="text-center font-weight-bolder text-xs mb-0">{{ $data->margin_jual }}</td>
 
-            {{-- 12. Quantity --}}
-            <td class="text-center font-weight-bolder text-xs mb-0">{{ $data->jumlah_beli }}</td>
+                            {{-- 12. Quantity --}}
+                            <td class="text-center font-weight-bolder text-xs mb-0">{{ $data->jumlah_beli }}</td>
 
-            {{-- 13. Image --}}
-            <td class="text-center font-weight-bolder text-xs mb-0">
-                <img src="{{ asset('storage/' . $data->foto_barang) }}" class="img-thumbnail cursor-pointer" alt="img product" width="50" 
-                     data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ $data->id_barang }}">
-            </td>
+                            {{-- 13. Image --}}
+                            <td class="text-center font-weight-bolder text-xs mb-0">
+                                <img src="{{ asset('storage/' . $data->foto_barang) }}" class="img-thumbnail cursor-pointer"
+                                    alt="img product" width="50" data-bs-toggle="modal"
+                                    data-bs-target="#staticBackdrop{{ $data->id_barang }}">
+                            </td>
 
-            {{-- 14. Sub Total --}}
-            <td class="text-center font-weight-bolder text-xs mb-0">Rp {{ number_format($data->sub_total, 0, ',', '.') }}</td>
+                            {{-- 14. Sub Total --}}
+                            <td class="text-center font-weight-bolder text-xs mb-0">Rp
+                                {{ number_format($data->sub_total, 0, ',', '.') }}</td>
 
-            {{-- 15. Total Pay --}}
-            <td class="text-center font-weight-bolder text-xs mb-0">Rp {{ number_format($data->total_bayar, 0, ',', '.') }}</td>
+                            {{-- 15. Total Pay --}}
+                            <td class="text-center font-weight-bolder text-xs mb-0">Rp
+                                {{ number_format($data->total_bayar, 0, ',', '.') }}</td>
 
-            {{-- 16. AKSI (paling kanan) --}}
-            <td class="text-center font-weight-bolder text-xs mb-0">
-                <div class="d-flex justify-content-center">
-                    <a href="{{ route('purchase.edit', $data->id) }}"> 
-                        <img src="{{ asset('be/assets/img/pen-3-outline-18.png') }}" alt="Edit" width="20" class="cursor-pointer me-2" title="Edit"> 
-                    </a>
-                    <a href="{{ route('purchase.destroy', $data->id) }}" onclick="hapus(event, this)">
-                        <img src="{{ asset('be/assets/img/trash-fill-18.png') }}" alt="Delete" width="20" class="cursor-pointer" title="Delete">
-                    </a>
-                </div>
-            </td>
-        </tr>
+                           
+                        </tr>
 
-        <div class="modal fade" id="staticBackdrop{{ $data->id_barang }}" data-bs-backdrop="static" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">{{ $data->nama_barang }}</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body text-center">
-                        <img src="{{ asset('storage/' . $data->foto_barang) }}" class="img-thumbnail" alt="Product" width="75%">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
+                        <div class="modal fade" id="staticBackdrop{{ $data->id_barang }}" data-bs-backdrop="static"
+                            tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">{{ $data->nama_barang }}</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body text-center">
+                                        <img src="{{ asset('storage/' . $data->foto_barang) }}" class="img-thumbnail"
+                                            alt="Product" width="75%">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
-    @endforeach
-</tbody>
 
 
-    
-    <!-- End Main Bagian Kanan -->
 
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+                <!-- End Main Bagian Kanan -->
+
+                <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
-    <form action="" method="post" id="frm">
-        @method('delete')
-        @csrf
-    </form>
-    <script>
-        let frm = document.getElementById('frm');
-        function hapus(event, el) {
-            event.preventDefault();
-            swal({
-                title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover this data!",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        frm.action = el.href;
-                        frm.submit();
-                    } else {
-                        swal("Your data is safe!");
+                <form action="" method="post" id="frm">
+                    @method('delete')
+                    @csrf
+                </form>
+                <script>
+                    let frm = document.getElementById('frm');
+                    function hapus(event, el) {
+                        event.preventDefault();
+                        swal({
+                            title: "Are you sure?",
+                            text: "Once deleted, you will not be able to recover this data!",
+                            icon: "warning",
+                            buttons: true,
+                            dangerMode: true,
+                        })
+                            .then((willDelete) => {
+                                if (willDelete) {
+                                    frm.action = el.href;
+                                    frm.submit();
+                                } else {
+                                    swal("Your data is safe!");
+                                }
+                            });
                     }
-                });
-        }
-    </script>
+                </script>
 
-    <script>
-        @if (session('btnsimpan'))
-            swal("Success!", "{{ session('btnsimpan') }}", "success");
-        @endif
+                <script>
+                    @if (session('btnsimpan'))
+                        swal("Success!", "{{ session('btnsimpan') }}", "success");
+                    @endif
 
-        @if (session('ubah'))
-            swal("Success!", "{{ session('ubah') }}", "success");
-        @endif
+                    @if (session('ubah'))
+                        swal("Success!", "{{ session('ubah') }}", "success");
+                    @endif
 
-        @if (session('hapus'))
-            swal("Deleted!", "{{ session('hapus') }}", "success");
-        @endif
-    </script>
+                    @if (session('hapus'))
+                        swal("Deleted!", "{{ session('hapus') }}", "success");
+                    @endif
+                </script>
 
 
 @endsection

@@ -40,10 +40,10 @@ class PurchaseController extends Controller
    public function store(Request $request)
 {
     $purchase = $request->only('no_nota', 'tgl_nota', 'id_distributor');
-    $purchase['total_bayar'] = 0; 
+    $purchase['total_bayar'] = $request->total_bayar; 
     $purchase = Purchase::create($purchase);
     
-    $purchaseDetails = $request->only('id_barang', 'harga_beli', 'margin_jual', 'jumlah_beli', 'subtotal');
+    $purchaseDetails = $request->only('id_barang', 'harga_beli', 'margin_jual', 'jumlah_beli', 'sub_total');
     $purchaseDetails['id_pembelian'] = $purchase->id; 
     $purchaseDetails = Purchase_Detail::create($purchaseDetails);
 
