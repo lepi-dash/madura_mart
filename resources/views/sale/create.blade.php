@@ -32,18 +32,17 @@
               <div class="row ms-3 me-3">
                 <div class="col-lg-6 col-md-6">
                   <div class="mb-3 px-3 pt-3">
-                    <label for="no_nota" class="form-label">No Invoice</label>
-                    <input type="text" class="form-control" id="no_nota" name="no_nota"
-                      value="@if(isset(session('data')->no_nota)){{ session('data')->no_nota }}@endif" readonly>
+                    <label for="no_struk" class="form-label">No Invoice</label>
+                    <input type="text" class="form-control" id="no_struk" name="no_struk"
+                      value="@if(isset(session('data')->no_struk)){{ session('data')->no_struk }}@endif" readonly>
                   </div>
                   <div class="mb-3 px-3 pt-3">
                     <label for="id_barang" class="form-label">Product</label>
                     <select class="form-control" id="id_barang" name="id_barang">
                       <option value="" selected>Select Product</option>
                       @foreach($products as $product)
-                        <option data-harga-jual="{{ $product->harga_jual }}" value="{{ $product->id }}"
-                          @if(isset(session('data')->id_barang) && session('data')->id_barang == $product->id) selected
-                          @endif>
+                        <option data-kdbarang="{{ $product->kdbarang }}" data-harga-jual="{{ $product->harga_jual }}"
+                          value="{{ $product->id }}" @if(isset(session('data')->id_barang) && session('data')->id_barang == $product->id) selected @endif>
                           {{ $product->nama_barang }}
                         </option>
                       @endforeach
@@ -183,7 +182,7 @@
                         {{ number_format($data->total_bayar, 0, ',', '.') }}
                       </td>
 
-                
+
                     </tr>
 
                     <div class="modal fade" id="staticBackdrop{{ $data->id_barang }}" data-bs-backdrop="static"
@@ -219,7 +218,7 @@
         let btnSimpan = document.getElementById('simpan');
         let form = document.getElementById('form');
         let id_barang = document.getElementById('id_barang');
-        let no_nota = document.getElementById('no_nota');
+        let no_struk = document.getElementById('no_struk');
         let jumlah_jual = document.getElementById('jumlah_jual');
         let harga_jual = document.getElementById('harga_jual');
         let subtotal = document.getElementById('subtotal');
@@ -267,7 +266,6 @@
             total_bayar_lama = 0;
           @endif
 
-          // Bersihkan format rupiah dari subtotal sebelum dijumlahkan
           let sub = parseInt(subtotal.value.replace(/[^0-9]/g, '')) || 0;
           return parseInt(total_bayar_lama) + sub;
         }
@@ -281,10 +279,14 @@
           total_bayar_input.value = rupiah(st + total_bayar_lama);
         }
 
-        // Bagian id_barang change dengan struktur IF-ELSE yang kamu mau
         id_barang.addEventListener('change', function () {
           let selectedOption = id_barang.options[id_barang.selectedIndex];
+          let kdbarang = selectedOption.getAttribute('data-kdbarang') || '';
           let hargaJual = selectedOption.getAttribute('data-harga-jual') || 0;
+
+          if (kdbarang) {
+            no_struk.value = kdbarang;
+          }
 
           harga_jual.value = rupiah(hargaJual);
 
@@ -300,10 +302,9 @@
             @else
               total_bayar_input.value = rupiah(hasilSub);
             @endif
-          }
+              }
         });
 
-        // Sinkronisasi saat jumlah diketik agar subtotal langsung berubah
         jumlah_jual.addEventListener('keyup', function () {
           if (id_barang.value !== "") {
             id_barang.dispatchEvent(new Event('change'));
@@ -325,7 +326,7 @@
             icon: "success",
             buttons: {
               confirm: {
-                text: "Yes, add new item!",
+                text: "Yes, add new item sale!",
                 value: true,
                 visible: true,
                 className: "btn btn-info",
@@ -341,7 +342,7 @@
             }
           }).then((isConfirm) => {
             if (isConfirm) {
-              no_nota.readOnly = true;
+              no_struk.readOnly = true;
               // Logika tambahan jika ada distributor/tgl_nota yang mau di-disable
             } else {
               window.location.href = "{{ route('sale.index') }}";
